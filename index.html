@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- Стилі Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Стилі Fontawesome -->
+    <script src="https://kit.fontawesome.com/7f8133e965.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.min.css">
+</head>
+
+<body>
+    <header>
+        <!-- Меню стилізації тексту -->
+        <menu id="menu1">
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group mr-2" role="group" aria-label="Third group">
+                    <!-- Кнопка переключення на меню редагування-->
+                    <button type="button" class="btn btn-secondary bg-light text-dark fas fa-code"
+                        id="edit_btn"></button>
+                </div>
+
+                <div class="btn-group mr-2" role="group" aria-label="First group">
+                    <!-- Кнопка жирного тексту-->
+                    <button type="button" class="btn btn-secondary bg-light text-dark fa fa-bold"
+                        id="bold_btn"></button>
+                    <!-- Кнопка похилого тексту-->
+                    <button type="button" class="btn btn-secondary bg-light text-dark fa fa-italic"
+                        id="italic_btn"></button>
+                    <!-- Кнопка підкресленого тексту-->
+                    <button type="button" class="btn btn-secondary bg-light text-dark fa fa-underline"
+                        id="underline_btn"></button>
+                    <!-- Кнопка закресленого тексту-->
+                    <button type="button" class="btn btn-secondary bg-light text-dark fa fa-strikethrough"
+                        id="crossline_btn"></button>
+                </div>
+                <!-- Кнопки вирівнювання тексту-->
+                <div class="btn-group mr-2" role="group" aria-label="Second group">
+                    <button type="button" class="btn btn-secondary bg-light text-dark fa fa-align-left "
+                        id="align_left_btn"></button>
+                    <button type="button" class="btn btn-secondary bg-light text-dark fa fa-align-center"
+                        id="align_center_btn"></button>
+                    <button type="button" class="btn btn-secondary bg-light text-dark fa fa-align-right"
+                        id="align_right_btn"></button>
+                </div>
+
+                <div class="btn-group mr-2" role="group" aria-label="First group">
+                    <div class="btn-group" role="group">
+                        <!-- Кнопка зміни шрифту-->
+                        <button id="btnGroupDrop1" type="button"
+                            class="btn dropdown-toggle bg-light btn-secondary text-dark fa fa-font btn-sm"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        </button>
+                        <!-- Випадаюче меню зміни шрифту-->
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
+                            <li class="dropdown-item mb-0 font_cng" id="arial_font">Arial</li>
+                            <li class="dropdown-item mb-0 font_cng" id="georgia_font">Georgia</li>
+                            <li class="dropdown-item mb-0 font_cng" id="impact_font">Impact</li>
+                            <li class="dropdown-item mb-0 font_cng" id="tahoma_font">Tahoma</li>
+                            <li class="dropdown-item mb-0 font_cng" id="timesnr_font">Times New Roman</li>
+                            <li class="dropdown-item mb-0 font_cng" id="verdana_font">Verdana</li>
+                        </div>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <!-- Кнопка зміни розміру шрифту-->
+                        <button id="btnGroupDrop1" type="button"
+                            class="btn dropdown-toggle bg-light btn-secondary text-dark fa fa-text-height btn-sm"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        </button>
+                        <!-- Випадаюче меню зміни розміру шрифту-->
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
+                            <li class="dropdown-item mb-0 font_sz">12px</li>
+                            <li class="dropdown-item mb-0 font_sz">14px</li>
+                            <li class="dropdown-item mb-0 font_sz">16px</li>
+                            <li class="dropdown-item mb-0 font_sz">18px</li>
+                            <li class="dropdown-item mb-0 font_sz">20px</li>
+                            <li class="dropdown-item mb-0 font_sz">22px</li>
+                            <li class="dropdown-item mb-0 font_sz">25px</li>
+                            <li class="dropdown-item mb-0 font_sz">30px</li>
+                        </div>
+                    </div>
+                    <!-- Кнопка модального вікна зміни кольору тексту-->
+                    <button type="button" class="btn btn-secondary bg-light text-dark fas fa-palette"
+                        data-toggle="modal" data-target="#textColorModal"></button>
+                    <!-- Кнопка модального вікна зміни фонового кольору -->
+                    <button type="button" class="btn btn-secondary bg-light text-dark fas fa-image" data-toggle="modal"
+                        data-target="#backgroundColorModal"></button>
+                </div>
+                <!-- Кнопка модального вікна входу-->
+                <div class="btn-group" role="group" aria-label="Third group">
+                    <button type="button" class="btn bg-light btn-secondary text-dark fas fa-lock" data-toggle="modal"
+                        data-target="#signInModal"></button>
+                </div>
+            </div>
+
+
+            <!-- Модальне вікно зміни кольору тексту-->
+            <div class="modal fade" id="textColorModal" tabindex="-1" role="dialog"
+                aria-labelledby="textColorModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="textColorModalLabel">Choose text color</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <!-- Кольорові блоку для натискання -->
+                        <div class="modal-body colors">
+                            <div class="color_block"></div>
+                            <div class="color_block"></div>
+                            <div class="color_block"></div>
+                            <div class="color_block"></div>
+                            <div class="color_block"></div>
+                            <div class="color_block"></div>
+                            <div class="color_block"></div>
+                            <div class="color_block"></div>
+                            <div class="color_block"></div>
+                            <div class="color_block"></div>
+                            <div class="color_block"></div>
+                            <div class="color_block"></div>
+                            <div class="color_block"></div>
+                            <div class="color_block"></div>
+                            <div class="color_block"></div>
+                            <div class="color_block"></div>
+                            <div class="color_block"></div>
+                            <div class="color_block"></div>
+                            <div class="color_block"></div>
+                            <div class="color_block"></div>
+                            <div class="color_block"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Модальне вікно зміни фонового кольору-->
+            <div class="modal fade" id="backgroundColorModal" tabindex="-1" role="dialog"
+                aria-labelledby="backgroundColorModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="backgroundColorModalLabel">Choose background color or image</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+
+                        <div class="modal-body">
+                            <!-- Навігаційне меню зміни фону-->
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="bgcolor-tab" data-toggle="tab" href="#bgcolor"
+                                        role="tab" aria-controls="home" aria-selected="true">Colors</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="bgimage-tab" data-toggle="tab" href="#bgimage" role="tab"
+                                        aria-controls="profile" aria-selected="false">Images</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="bgfile-tab" data-toggle="tab" href="#bgfile" role="tab"
+                                        aria-controls="contact" aria-selected="false">Files</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="bgcolor" role="tabpanel"
+                                    aria-labelledby="bgcolor-tab">
+                                    <div class="color_block"></div>
+                                    <div class="color_block"></div>
+                                    <div class="color_block"></div>
+                                    <div class="color_block"></div>
+                                    <div class="color_block"></div>
+                                    <div class="color_block"></div>
+                                    <div class="color_block"></div>
+                                    <div class="color_block"></div>
+                                    <div class="color_block"></div>
+                                    <div class="color_block"></div>
+                                    <div class="color_block"></div>
+                                    <div class="color_block"></div>
+                                    <div class="color_block"></div>
+                                    <div class="color_block"></div>
+                                    <div class="color_block"></div>
+                                    <div class="color_block"></div>
+                                    <div class="color_block"></div>
+                                    <div class="color_block"></div>
+                                    <div class="color_block"></div>
+                                    <div class="color_block"></div>
+                                    <div class="color_block"></div>
+                                </div>
+                                <!-- Картинки для встановлення в якості фонового зображення при натисканні-->
+                                <div class="tab-pane fade" id="bgimage" role="tabpanel" aria-labelledby="bgimage-tab">
+                                    <div class="image_block"></div>
+                                    <div class="image_block"></div>
+                                    <div class="image_block"></div>
+                                    <div class="image_block"></div>
+                                    <div class="image_block"></div>
+                                    <div class="image_block"></div>
+                                    <div class="image_block"></div>
+                                    <div class="image_block"></div>
+                                    <div class="image_block"></div>
+                                </div>
+                                <!-- Завантаження картинок для використання в якості фонового зображення-->
+                                <div class="tab-pane fade" id="bgfile" role="tabpanel" aria-labelledby="bgfile-tab">
+                                    <div class="input-group mt-3">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="inputGroupFile"
+                                                aria-describedby="inputGroupFileAddon" accept="image/*">
+                                            <label class="custom-file-label" for="inputGroupFile">Choose file</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Модальне вікно для входу -->
+            <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModallLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header d-flex justify-content-center">
+                            <h4 class="modal-title" id="signInModallLabel">Sign In</h4>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Форма для входу -->
+                            <form class="needs-validation" id="sign_in_form" novalidate>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" id="login" placeholder="Login here..."
+                                        required>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" id="password" placeholder="Password here..."
+                                        required>
+                                </div>
+                                <!-- Повідомлення про помилку -->
+                                <div class="invalid-feedback"></div>
+                                <!-- Кнопка входу -->
+                                <input type="button" class="btn btn-lg btn-secondary btn-block mt-3 mb-3"
+                                    value="Sign In" id="sign_in">
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </menu>
+        <!-- Меню для редагування тексту -->
+        <menu id="menu2">
+            <!-- Кнопки редагування тексту -->
+            <div class="btn-group mr-2" role="group" aria-label="First group">
+                <!-- Кнопка для збереження тексту -->
+                <button type="button" class="btn btn-secondary bg-light text-dark fas fa-save" id="save_btn"></button>
+                <!-- Кнопка для виклику модального вікна з формою для створення таблиці-->
+                <button type="button" class="btn btn-secondary bg-light text-dark fa fa-table" id="table_btn"
+                    data-toggle="modal" data-target="#createTableModal"></button>
+                <!-- Кнопка для виклику модального вікна з формою для створення нумерованого списку (ol) -->
+                <button type="button" class="btn btn-secondary bg-light text-dark fa fa-list-ol" id="ol_btn"
+                    data-toggle="modal" data-target="#ol_Modal"></button>
+                <!-- Кнопка для виклику модального вікна з формою для створення маркованого списку (ul)-->
+                <button type="button" class="btn btn-secondary bg-light text-dark fa fa-list-ul" id="ul_btn"
+                    data-toggle="modal" data-target="#ul_Modal"></button>
+            </div>
+            <!-- Модальне вікно створення таблиці-->
+            <div class="modal fade" id="createTableModal" tabindex="-1" role="dialog"
+                aria-labelledby="createTableModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="createTableModalLabel">Create table</h4>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Форма для створення таблиці-->
+                            <form class="needs-validation" id="table_form" novalidate>
+                                <div class="form-row">
+                                    <!-- Кількість рядків-->
+                                    <div class="form-group col-md-6">
+                                        <label for="tr_number">Count TR:</label>
+                                        <input type="text" class="form-control" id="tr_number"
+                                            placeholder="Type here...">
+                                    </div>
+                                    <!-- Кількість комірок в рядку-->
+                                    <div class="form-group col-md-6">
+                                        <label for="td_number">Count TD:</label>
+                                        <input type="text" class="form-control" id="td_number"
+                                            placeholder="Type here...">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <!-- Ширина комірки -->
+                                    <div class="form-group col-md-6">
+                                        <label for="td_width">Width of TD:</label>
+                                        <input type="text" class="form-control" id="td_width"
+                                            placeholder="Type here...">
+                                    </div>
+                                    <!-- Висота комірки -->
+                                    <div class="form-group col-md-6">
+                                        <label for="td_height">Height of TD:</label>
+                                        <input type="text" class="form-control" id="td_height"
+                                            placeholder="Type here...">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <!-- Ширина границі -->
+                                    <div class="form-group col-md-6">
+                                        <label for="border_width">Width of border:</label>
+                                        <input type="text" class="form-control" id="border_width"
+                                            placeholder="Type here...">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <!-- Стиль границі -->
+                                        <label for="border_style">Style of border:</label>
+                                        <select id="border_style" class="form-control">
+                                            <option selected disabled>choose style</option>
+                                            <option>dotted</option>
+                                            <option>dashed</option>
+                                            <option>solid</option>
+                                            <option>double</option>
+                                            <option>groove</option>
+                                            <option>ridge</option>
+                                            <option>inset</option>
+                                            <option>outset</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <!-- Колір границі -->
+                                        <label for="border_color">Color of border:</label>
+                                        <select class="form-control" id="border_color">
+                                            <option selected disabled>choose color</option>
+                                            <option>black</option>
+                                            <option>red</option>
+                                            <option>green</option>
+                                            <option>blue</option>
+                                            <option>yellow</option>
+                                            <option>white</option>
+                                            <option>gray</option>
+                                            <option>pink</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Повідомлення про помилку -->
+                                <div class="invalid-feedback"></div>
+                                <div class="form-row">
+                                    <!-- Кнопка очищення форми -->
+                                    <div class="form-group col-md-6">
+                                        <input type="button" class="btn  btn-block btn-danger  mt-3 mb-3" value="Reset"
+                                            id="reset_table">
+                                    </div>
+                                    <!-- Кнопка створення таблиці -->
+                                    <div class="form-group col-md-6">
+                                        <input type="button" class="btn  btn-success  btn-block mt-3 mb-3"
+                                            value="Create table" id="create_table">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Модальне вікно створення списку ol-->
+            <div class="modal fade" id="ol_Modal" tabindex="-1" role="dialog" aria-labelledby="ol_Modal_Label"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="ol_Modal_Label">Create Ol</h4>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Форма створення списку ol-->
+                            <form class="needs-validation" id="ol_form" novalidate>
+                                <!-- Кількість li-->
+                                <div class="form-group mb-3">
+                                    <label for="ol_li_count">Count li item:</label>
+                                    <input type="text" class="form-control" id="ol_li_count" placeholder="Type here..."
+                                        required>
+                                </div>
+                                <!-- Тип маркера списку-->
+                                <div class="form-group mb-3">
+                                    <label for="ol_mark">Type mark of list:</label>
+                                    <select type="text" class="form-control" id="ol_mark" required>
+                                        <option value="" selected disabled>choose Ol type mark</option>
+                                        <option value="">1</option>
+                                        <option value="">I</option>
+                                        <option value="">i</option>
+                                        <option value="">A</option>
+                                        <option value="">a</option>
+                                    </select>
+                                </div>
+                                <!-- Повідомлення про помилку -->
+                                <div class="invalid-feedback"></div>
+                                <div class="form-row mt-2">
+                                    <!-- Кнопка очищення форми -->
+                                    <div class="form-group col-md-6 mb-2">
+                                        <input type="button" class="btn  btn-block btn-danger" value="Reset"
+                                            id="reset_ol">
+                                    </div>
+                                    <!-- Кнопка створення списку -->
+                                    <div class="form-group col-md-6 mb-2">
+                                        <input type="button" class="btn  btn-success  btn-block " value="Create table"
+                                            id="create_ol">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Модальне вікно створення списку ul-->
+            <div class="modal fade" id="ul_Modal" tabindex="-1" role="dialog" aria-labelledby="ul_Modal_Label"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="ul_Modal_Label">Create Ol</h4>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Форма для створення списку ul-->
+                            <form class="needs-validation" id="ul_form" novalidate>
+                                <!-- Кількість li-->
+                                <div class="form-group mb-3">
+                                    <label for="ul_li_count">Count li item:</label>
+                                    <input type="text" class="form-control" id="ul_li_count" placeholder="Type here..."
+                                        required>
+                                </div>
+                                <!-- Тип маркера списку-->
+                                <div class="form-group mb-3">
+                                    <label for="ul_mark">Type mark of list:</label>
+                                    <select type="text" class="form-control" id="ul_mark" required>
+                                        <option value="" selected disabled>choose Ul type mark</option>
+                                        <option value="">circle</option>
+                                        <option value="">disk</option>
+                                        <option value="">square</option>
+                                    </select>
+                                </div>
+                                <!-- Повідомлення про помилку -->
+                                <div class="invalid-feedback"></div>
+                                <div class="form-row mt-2">
+                                    <!-- Кнопка очищення полів форми -->
+                                    <div class="form-group col-md-6 mb-2">
+                                        <input type="button" class="btn  btn-block btn-danger" value="Reset"
+                                            id="reset_ul">
+                                    </div>
+                                    <!-- Кнопка створення списку -->
+                                    <div class="form-group col-md-6 mb-2">
+                                        <input type="button" class="btn  btn-success  btn-block " value="Create table"
+                                            id="create_ul">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </menu>
+    </header>
+    <!-- Основне поле/поле для тексту -->
+    <main>
+        <!-- Контейнер для  нередагованого тексту -->
+        <div id="text">
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum amet eaque repudiandae!</p>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum amet eaque repudiandae!</p>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum amet eaque repudiandae!</p>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum amet eaque repudiandae!</p>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum amet eaque repudiandae!</p>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum amet eaque repudiandae!</p>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum amet eaque repudiandae!</p>
+        </div>
+        <!-- Поле для редагування тексту -->
+        <textarea id="text_field" cols="30" rows="10"></textarea>
+    </main>
+    <!-- Бібліотека Jquery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <!-- Бібліотека Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <!-- Бібліотека Bootstrap -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <script src="js/script.min.js"></script>
+</body>
+
+</html>
